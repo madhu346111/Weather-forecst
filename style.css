@@ -1,0 +1,66 @@
+body {
+  transition: all 1s ease;
+}
+
+/* Flash effect for thunder */
+.flash {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:white;
+  opacity:0;
+  pointer-events:none;
+  z-index:50;
+}
+
+/* Sun */
+.sun {
+  position:absolute;
+  top:60px; right:80px;
+  width:140px; height:140px;
+  border-radius:50%;
+  background: radial-gradient(circle, #FFD700 40%, #FFA500 70%);
+  box-shadow:0 0 80px rgba(255,215,0,0.9);
+  animation: pulseSun 3s ease-in-out infinite alternate;
+}
+.sun::before {
+  content:"";
+  position:absolute;
+  top:-30px; left:-30px;
+  width:200px; height:200px;
+  border-radius:50%;
+  background: repeating-conic-gradient(rgba(15,112,157,0.4) 0deg 10deg, transparent 15deg 20deg);
+  animation: rotateRays 30s linear infinite;
+}
+@keyframes pulseSun { from{transform:scale(1)} to{transform:scale(1.1)} }
+@keyframes rotateRays { 100%{transform:rotate(360deg)} }
+
+/* Cloud */
+.cloud {
+  position:absolute; top:100px; left:-200px;
+  width:200px; height:60px; background:white; border-radius:50px;
+  opacity:0.8; animation: moveCloud 25s linear infinite;
+}
+.cloud::before,.cloud::after{
+  content:""; position:absolute; background:white; width:100px; height:100px; top:-50px; border-radius:50%;
+}
+.cloud::before{ left:20px; } .cloud::after{ right:20px; }
+@keyframes moveCloud { 0%{left:-250px} 100%{left:110%} }
+
+/* Stars */
+.star {
+  position:absolute; border-radius:50%; background:white; opacity:0.8;
+  animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle { 0%{opacity:0.2} 50%{opacity:0.8} 100%{opacity:0.2} }
+
+/* Responsive sun */
+@media (max-width:640px){
+  .sun { top:20px; right:20px; width:100px; height:100px; }
+  .sun::before { width:150px; height:150px; top:-25px; left:-25px; }
+}
+
+/* Dark mode */
+.dark-mode {
+  color:white;
+}
